@@ -89,19 +89,19 @@ equalsBtn.addEventListener("click", () => {
   operate();
 });
 
-window.addEventListener("keydown", (e) => {
-  numberBtns.forEach((button) => {
-    button.classList.add("pressed");
-  });
-
+// Enables keyboard compatability
+window.addEventListener("keydown", function (e) {
   if (e.key === "Escape") {
+    allClearBtn.classList.add("pressed");
     clear();
   }
   if (e.key === "Delete") {
+    deleteBtn.classList.add("pressed");
     currentScreen = "";
     updateDisplay();
   }
   if (e.key === "Enter") {
+    equalsBtn.classList.add("pressed");
     operate();
   }
   if (
@@ -122,5 +122,9 @@ window.addEventListener("keydown", (e) => {
   }
   if (e.key === "+" || e.key === "-" || e.key === "*" || e.key === "/") {
     selectOperator(e.key);
+  }
+  if (e.key === "Backspace") {
+    currentScreen = currentScreen.slice(0, -1);
+    updateDisplay();
   }
 });
