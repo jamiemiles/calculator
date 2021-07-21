@@ -60,6 +60,7 @@ const clear = () => {
   currentScreen = "";
   previousScreen = "";
   operation = undefined;
+  updateDisplay();
 };
 
 // Checks for number buttons being clicked.
@@ -89,37 +90,37 @@ equalsBtn.addEventListener("click", () => {
 });
 
 window.addEventListener("keydown", (e) => {
-  const keypadNumber = document.querySelector(
-    `[data-key-number="${e.keyCode}"`
-  );
-  appendNumber(keypadNumber.textContent);
-});
-window.addEventListener("keydown", (e) => {
-  const keypadOperators = document.querySelector(
-    `button[data-key-operator="${e.keyCode}"`
-  );
-  selectOperator(keypadOperators.textContent);
-});
+  numberBtns.forEach((button) => {
+    button.classList.add("pressed");
+  });
 
-window.addEventListener("keydown", (e) => {
-  const keypadEquals = document.querySelector(
-    `button[data-key-equals="${e.keyCode}"]`
-  );
-  operate();
-});
-
-// const keypadClear = document.querySelector('button[data-key-clear="27"]');
-// keypadClear.addEventListener("keydown", (e) => {
-//   console.log(keypadClear.textContent);
-//   currentScreen = "";
-//   previousScreen = "";
-// });
-
-window.addEventListener("keydown", (e) => {
-  const keypadDelete = document.querySelector(
-    `button[data-key-delete="${e.keyCode}"]`
-  );
-  e.keycode === "Delete";
-  console.log(keypadDelete.textContent);
-  currentScreen = "";
+  if (e.key === "Escape") {
+    clear();
+  }
+  if (e.key === "Delete") {
+    currentScreen = "";
+    updateDisplay();
+  }
+  if (e.key === "Enter") {
+    operate();
+  }
+  if (
+    e.key === "1" ||
+    e.key === "2" ||
+    e.key === "3" ||
+    e.key === "4" ||
+    e.key === "5" ||
+    e.key === "6" ||
+    e.key === "7" ||
+    e.key === "8" ||
+    e.key === "9" ||
+    e.key === "0" ||
+    e.key === "."
+  ) {
+    appendNumber(e.key);
+    updateDisplay();
+  }
+  if (e.key === "+" || e.key === "-" || e.key === "*" || e.key === "/") {
+    selectOperator(e.key);
+  }
 });

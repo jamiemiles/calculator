@@ -53,3 +53,8 @@ body {
   font-size: 3rem;
   color: rgba(255, 255, 255);
 }
+.pressed {
+  transition: all 0.1s;
+  transform: scale(1.1);
+  background-color: #ff9500;
+}
